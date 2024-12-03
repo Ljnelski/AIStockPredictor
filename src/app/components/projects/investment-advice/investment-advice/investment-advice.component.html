@@ -1,0 +1,51 @@
+<div class="project-content">
+  <h1>Investment Assitant</h1>
+  <!-- FORM -->
+  <section class="action-panel" *ngIf="!loading && !reportGenerated">
+    <form (ngSubmit)="onSubmitInput(input.value)" id="ticker-input-form">
+      <label for="ticker-input">
+        Add up to 3 stock tickers below to get a super accurate stock
+        predictions report👇
+      </label>
+      <div class="form-input-control">
+        <input #input type="text" placeholder="MSFT" />
+        <button class="add-ticker-btn">
+          <img src="/add.svg" class="add-ticker-svg" alt="add" />
+        </button>
+      </div>
+    </form>
+    <!-------->
+
+    <!-- TICKER LIST -->
+    <div *ngIf="tickersArr.length > 0; else noTickers">
+      <ul>
+        <li *ngFor="let ticker of tickersArr">{{ ticker }}</li>
+      </ul>
+    </div>
+    <ng-template #noTickers>
+      <p class="ticker-choice-display">Your tickers will appear here...</p>
+    </ng-template>
+    <!---->
+    <button
+      class="generate-report-btn"
+      type="button"
+      (click)="onGenerateReportClicked()"
+      [disabled]="!(tickersArr.length > 0)"
+    >
+      Generate Report
+    </button>
+    <p class="tag-line">Always correct 15% of the time!</p>
+  </section>
+
+  <!-- LOADING PANEL -->
+  <section class="loading-panel" *ngIf="loading">
+    <img src="/loader.svg" alt="loading" />
+    <div id="api-message">{{ apiMessage }}</div>
+  </section>
+  <!-- OUTPUT PANEL -->
+  <section class="output-panel" *ngIf="reportGenerated">
+    <h2>Your Report 😜</h2>
+    <p>{{ report }}</p>
+  </section>
+  <footer>&copy; This is not real financial advice!</footer>
+</div>

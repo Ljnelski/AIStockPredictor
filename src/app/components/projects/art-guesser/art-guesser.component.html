@@ -1,0 +1,11 @@
+<div class ="project-content">
+  <h1>ArtGuesser 👩‍🎨</h1>
+  <div id="output-img" class="frame">
+    <h2 *ngIf="!imageLoaded">Describe a famous painting without saying its name or the artist!</h2>
+    <img src={{imageUrl}}>
+  </div>
+  <form (ngSubmit)="onSubmitInput(input.value)" id="image-prompt-form">
+    <textarea #input type="text" placeholder="A woman with long brown hair..." id="instruction"></textarea>
+    <button id="submit-btn">Create</button>
+  </form>
+</div>
